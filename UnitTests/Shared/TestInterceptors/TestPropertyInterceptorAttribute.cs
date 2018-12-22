@@ -23,6 +23,9 @@ namespace UnitTest_InterceptorsForTest
 
             if (Comparer.Equals(value, (double)66))
                 propertyInterceptionInfo.SetValue(78344.8f);
+
+            if (Comparer.Equals(value, (int)113))
+                propertyInterceptionInfo.SetValue(null);
         }
 
         public bool OnSet(PropertyInterceptionInfo propertyInterceptionInfo, object oldValue, object newValue)

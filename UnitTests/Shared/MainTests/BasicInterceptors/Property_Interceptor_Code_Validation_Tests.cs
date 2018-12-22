@@ -107,6 +107,9 @@ namespace UnitTests.BasicInterceptors
         [TestPropertyInterceptor]
         public long ValueTypePropertyPrivateSetter { get; private set; }
 
+        [TestPropertyInterceptor]
+        public int? NullableProperty { get; set; }
+
         [TestMethod]
         public void Array_Property_Setter()
         {
@@ -196,6 +199,19 @@ namespace UnitTests.BasicInterceptors
 
             this.ValueTypeProperty = 30;
             Assert.AreEqual(9999, this.ValueTypeProperty);
+        }
+
+        [TestMethod]
+        public void Nullable_Property()
+        {
+            this.NullableProperty = 113;
+            Assert.IsNull(this.NullableProperty);
+
+            this.NullableProperty = 121;
+            Assert.AreEqual(121, this.NullableProperty);
+
+            this.NullableProperty = null;
+            Assert.IsNull(this.NullableProperty);
         }
 
         private List<long> Blub()

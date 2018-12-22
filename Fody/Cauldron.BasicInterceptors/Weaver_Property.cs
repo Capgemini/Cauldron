@@ -518,8 +518,8 @@ public static class Weaver_Property
             // Otherwise if the property is not a value type and nullable
             else if (!propertyType.IsValueType || propertyType.IsNullable || propertyType.IsArray)
                 CodeMe<CoderBase>(
-                    field => setterCode.SetValue(field, null),
-                    property => setterCode.Call(property.Setter, null));
+                    field => setterCode.SetValue(field, null).Return(),
+                    property => setterCode.Call(property.Setter, null).Return());
             else // otherwise... throw an exception
                 then.ThrowNew(typeof(NotSupportedException), "Value types does not accept null values.");
 
