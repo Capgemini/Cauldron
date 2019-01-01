@@ -93,4 +93,32 @@ namespace UnitTests.BasicInterceptors
             return 44;
         }
     }
+
+    [TestClass]
+    public class SimpleMethod_Interceptor_Code_Validation_Generic_Tests<T>
+    {
+        [SimpleInterceptor]
+        public async Task Async_Method()
+        {
+            await Task.Run(() => default(T));
+        }
+
+        [SimpleInterceptor]
+        public async Task<T> Generic_Async_Method()
+        {
+            return await Task.Run(() => default(T));
+        }
+
+        [SimpleInterceptor]
+        public async Task<T> Generic_Async_Method_With_Parameters(int a, string b)
+        {
+            return await Task.Run(() => default(T));
+        }
+
+        [SimpleInterceptor]
+        public async Task<T> Generic_Async_Method_With_Generic_Parameters<TParam1, TParam2>(TParam1 p1, int a, TParam2 p2, string b)
+        {
+            return await Task.Run(() => default(T));
+        }
+    }
 }

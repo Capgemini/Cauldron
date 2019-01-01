@@ -904,6 +904,12 @@ namespace Cauldron.Interception.Cecilator
             {
                 var declaringType = new GenericInstanceType(field.DeclaringType.typeDefinition);
 
+                if (method.methodReference.DeclaringType.IsGenericInstance && method.methodReference.DeclaringType is GenericInstanceType genericInstanceType)
+                {
+                    foreach (var parameter in genericInstanceType.GenericArguments)
+                        declaringType.GenericArguments.Add(parameter);
+                }
+
                 foreach (var parameter in method.methodReference.GenericParameters)
                     declaringType.GenericArguments.Add(parameter);
 
@@ -1442,7 +1448,7 @@ namespace Cauldron.Interception.Cecilator
             };
 
             foreach (var parameter in self.Parameters)
-                reference.Parameters.Add(new ParameterDefinition(parameter.ParameterType));
+                reference.Parameters.Add(new ParameterDefinition(parameter.ParameterType) { Name = parameter.Name });
 
             foreach (var generic_parameter in self.GenericParameters)
                 reference.GenericParameters.Add(new GenericParameter(generic_parameter.Name, reference));
